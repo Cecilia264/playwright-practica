@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Biblioteca</title>
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <header>
+
+        <h1 id="paginaBiblioteca">Biblioteca</h1>
+
+        <nav>
+            <a href="#" onclick="mostrarSeccion('personas')">Personas</a>
+            <a href="#" onclick="mostrarSeccion('libros')">Libros</a>
+            <a href="#" onclick="mostrarSeccion('autores')">Autores</a>
+            <button onclick="cerrarSesion()">Cerrar sesión</button>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- ==================== PERSONAS ==================== -->
+
+        <section id="personas" class="seccion">
+
+            <h2>ABM de Personas</h2>
+
+            <form id="personaForm">
+
+                <input type="hidden" id="personaId">
+
+                <label for="nombrePersona">Nombre</label>
+                <input type="text" id="nombrePersona" placeholder="Ingrese el nombre" required>
+
+                <label for="apellidoPersona">Apellido</label>
+                <input type="text" id="apellidoPersona" placeholder="Ingrese el apellido" required>
+
+                <label for="dniPersona">DNI</label>
+                <input type="text" id="dniPersona" placeholder="Ingrese el DNI" required>
+
+                <button type="submit" id="btnPersona">
+                    Agregar persona
+                </button>
+
+                <button type="button"
+                        id="cancelarPersona"
+                        onclick="cancelarEdicionPersona()"
+                        class="cancelar"
+                        style="display:none;">
+                    Cancelar
+                </button>
+
+            </form>
+
+
+            <h3>Personas registradas</h3>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaPersonas"></tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- ==================== LIBROS ==================== -->
+
+        <section id="libros" class="seccion">
+
+            <h2>ABM de Libros</h2>
+
+            <form id="libroForm">
+
+                <input type="hidden" id="libroId">
+
+                <label>Título</label>
+                <input type="text" id="tituloLibro" required>
+
+                <label>Autor</label>
+                <select id="autorLibro" required>
+                    <option value="">Seleccionar autor</option>
+                </select>
+
+                <label>Cantidad</label>
+                <input type="number" id="cantidadLibro" min="1" required>
+
+                <button type="submit" id="btnLibro">
+                    Agregar libro
+                </button>
+
+                <button type="button"
+                        id="cancelarLibro"
+                        onclick="cancelarEdicionLibro()"
+                        class="cancelar"
+                        style="display:none;">
+                    Cancelar
+                </button>
+
+            </form>
+
+
+            <h3>Libros registrados</h3>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaLibros"></tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- ==================== AUTORES ==================== -->
+
+        <section id="autores" class="seccion">
+
+            <h2>ABM de Autores</h2>
+
+            <form id="autorForm">
+
+                <input type="hidden" id="autorId">
+
+                <label>Nombre</label>
+                <input type="text" id="nombreAutor" required>
+
+                <label>Apellido</label>
+                <input type="text" id="apellidoAutor" required>
+
+                <button type="submit" id="btnAutor">
+                    Agregar autor
+                </button>
+
+                <button type="button"
+                        id="cancelarAutor"
+                        onclick="cancelarEdicionAutor()"
+                        class="cancelar"
+                        style="display:none;">
+                    Cancelar
+                </button>
+
+            </form>
+
+
+            <h3>Autores registrados</h3>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaAutores"></tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>
