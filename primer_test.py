@@ -1,12 +1,46 @@
-# Abrir index.html
-# Comprobar el título
-# Hacer login y hacer clic en el botón
-# Comprobar que cambió la URL a biblioteca.html
-# Comprobar que aparece el texto "Biblioteca"
-# Volver atrás
-# Comprobar nuevamente que estamos en index.html
+from playwright.sync_api import sync_playwright
+
+def test_login_credenciales_validas():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        page = browser.new_page()
+
+        page.goto("http://127.0.0.1:5500/pagina/index.html")
+
+        page.locator("#usuario").fill("admin")
+        page.locator("#password").fill("1234")
+        page.wait_for_timeout(1000)
+        page.locator("#boton").click()
+
+        assert page.locator("#paginaBiblioteca").is_visible()
+
+        browser.close()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
@@ -65,6 +99,7 @@ with sync_playwright() as p:
 
     browser.close()
 
+"""
 
 
 """with abre un bloque donde p representa la instancia principal de Playwright.
