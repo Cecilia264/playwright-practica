@@ -1,35 +1,71 @@
 from playwright.sync_api import sync_playwright
 
+### TC-001 - Login con credenciales válidas
 def test_login_credenciales_validas():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=False, slow_mo=500)
         page = browser.new_page()
 
         page.goto("http://127.0.0.1:5500/pagina/index.html")
 
         page.locator("#usuario").fill("admin")
         page.locator("#password").fill("1234")
-        page.wait_for_timeout(1000)
-        page.locator("#boton").click()
+        page.get_by_role("button", name="Ingresar").click()
 
         assert page.locator("#paginaBiblioteca").is_visible()
 
         browser.close()
 
 
+### TC-002 - Login con usuario incorrecto
+def test_login_usuario_incorrecto():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False, slow_mo=500)
+        page = browser.new_page()
+
+        page.goto("http://127.0.0.1:5500/pagina/index.html")
+
+        page.locator("#usuario").fill("usuario_inexistente")
+        page.locator("#password").fill("1234")
+        page.get_by_role("button", name="Ingresar").click()
+
+        assert page.get_by_text("Usuario o contraseña incorrectos.").is_visible()
+
+        browser.close()
 
 
+### TC-003 - Login con contraseña incorrecta
+def test_login_contraseña_incorrecta():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False, slow_mo=500)
+        page = browser.new_page()
+
+        page.goto("http://127.0.0.1:5500/pagina/index.html")
+
+        page.locator("#usuario").fill("admin")
+        page.locator("#password").fill("contraseña_incorrecta")
+        page.get_by_role("button", name="Ingresar").click()
+
+        assert page.get_by_text("Usuario o contraseña incorrectos.").is_visible()
+
+        browser.close()
 
 
+### TC-004 - Login con campos vacíos
+def test_login_campos_vacios():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False, slow_mo=500)
+        page = browser.new_page()
 
+        page.goto("http://127.0.0.1:5500/pagina/index.html")
+        
+        page.locator("#usuario").fill("")
+        page.locator("#password").fill("")
+        page.get_by_role("button", name="Ingresar").click()
 
+        assert page.locator("#usuario").evaluate("(element) => !element.checkValidity()")
 
-
-
-
-
-
-
+        browser.close()
 
 
 
