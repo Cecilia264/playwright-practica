@@ -1,5 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright
+from pages.login_page import LoginPage
 
 
 @pytest.fixture
@@ -13,3 +14,9 @@ def page():
         yield page
 
         browser.close()
+
+
+@pytest.fixture
+def login_page(page):
+    # le pasamos la pagina abierta a nuestra clase LoginPage
+    return LoginPage(page)  # crea el objeto

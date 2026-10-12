@@ -88,3 +88,44 @@ El sistema no permite continuar con los campos vacíos y muestra el mensaje "Rel
 
 **Estado:** 
 PASS
+
+# ---------------------------------------------------------------------------------------------
+
+### TC-005 - Usuario vacío y contraseña válida
+
+**Precondición:** El usuario se encuentre en la pantalla de login.
+
+**Pasos:**
+1. No ingresar usuario.
+2. Ingresar la contraseña `1234`.
+3. Presionar el botón "Ingresar".
+
+**Resultado esperado:** 
+El sistema no debe permitir el acceso y debe solicitar completar los campos obligatorios.
+
+**Resultado obtenido:** 
+El sistema no permite continuar con el campo correspondiente vacío
+
+**Estado:** 
+PASS
+
+
+### TC-006 - Usuario válido y contraseña vacía
+
+**Precondición:** El usuario se encuentre en la pantalla de login.
+
+**Pasos:**
+1. Ingresar el usuario `admin`.
+2. No ingresar contraseña.
+3. Presionar el botón "Ingresar".
+
+**Resultado esperado:** 
+El sistema no debe permitir el acceso y debe solicitar completar los campos obligatorios.
+
+**Resultado obtenido:** 
+El sistema no permite continuar con el campo correspondiente vacío
+
+**Estado:** 
+PASS
+
+
