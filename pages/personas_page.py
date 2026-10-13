@@ -31,14 +31,31 @@ class PersonasPage:
         expect(self.tabla_personas).to_contain_text(dni)
 
 
-    def eliminar_persona(self):
-        # escuchar la alerta/popup de confirmacion de JS y aceptarla automaticamente
+    def eliminar_persona(self, texto_busqueda: str):
+        # acepta la alerta de confirmación de JavaScript
         self.page.once("dialog", lambda dialog: dialog.accept())
-
-        # hacer click en el primer botón "Eliminar" de la tabla
-        self.tabla_personas.locator(".eliminar").first.click()
+        
+        # Busca la fila específica por DNI o Nombre y hace clic en Eliminar
+        fila = self.tabla_personas.locator("tr", has_text=texto_busqueda)
+        fila.locator(".eliminar").click()
 
 
     def verificar_persona_no_esta_en_tabla(self, texto: str):
         # verifica que un nombre, apellido o dni, ya no aparezca en la tabla
         expect(self.tabla_personas).not_to_contain_text(texto)
+
+
+    def editar_persona(self, texto_busqueda: str, nuevo_nombre: str, nuevo_apellido: str, nuevo_dni: str):
+        # 1. busca la fila especifica (tr) que contiene el texto (ej: dni o nombre)
+        fila = self.tabla_personas.locator("tr", has_text=texto_busqueda)
+
+        # 2. hace click en el boton "Editar" de ESA fila
+        fila.locator(".editar").click()
+
+        # 3. limpia e ingresa los nuevos datos en el formulario
+        self.nombre_input.fill(nuevo_nombre)
+        self.apellido_input.fill(nuevo_apellido)
+        self.dni_input.fill(nuevo_dni)
+
+        # 4. guarda los cambios
+        self.btn_agregar.click()
