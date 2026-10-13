@@ -2,6 +2,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 from pages.login_page import LoginPage
 from pages.personas_page import PersonasPage
+from pages.autores_page import AutoresPage
 
 
 @pytest.fixture
@@ -28,3 +29,11 @@ def personas_page(page, login_page):
     # inicia sesion primero para poder esta en la pantalla de la biblioteca
     login_page.ingresar_credenciales("admin", "1234") # aqui se inicia sesion atomaticamente
     return PersonasPage(page)
+
+
+@pytest.fixture
+def autores_page(page, login_page):
+    login_page.ingresar_credenciales("admin", "1234")
+    autores = AutoresPage(page)
+    autores.ir_a_autores()  # inicia sesion y navega directo a la pestaña de Autores
+    return autores

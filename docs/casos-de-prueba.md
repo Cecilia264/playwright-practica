@@ -161,3 +161,46 @@ PASS
 
 **Estado:** 
 PASS
+
+
+### TC-010 - Alta de autor exitosa
+**Precondición:** El usuario ha iniciado sesión correctamente y se encuentra en la sección de Autores.
+
+**Pasos:**
+1. Completar el campo "Nombre" con un valor válido (ej: "Gabriel").
+2. Completar el campo "Apellido" con un valor válido (ej: "García Márquez").
+3. Hacer clic en el botón "Agregar autor".
+
+**Resultado Esperado:** Se agrega una nueva fila en la tabla de autores mostrando el Nombre y Apellido ingresados.
+
+**Estado:** 
+PASS
+
+
+### TC-011 - Baja/Eliminación de autor
+**Precondición:** Existe al menos un autor registrado en la tabla.
+
+**Pasos:**
+1. Ubicar la fila del autor a eliminar mediante su Nombre o Apellido.
+2. Hacer clic en el botón "Eliminar" correspondiente a esa fila.
+3. Aceptar la alerta emergente de confirmación de JavaScript.
+
+**Resultado Esperado:** El autor seleccionado se elimina y ya no figura visible en la tabla.
+
+**Estado:** 
+PASS
+
+
+### TC-012 - Edición de autor exitosa
+**Precondición:** Existe al menos un autor registrado en la tabla.
+
+**Pasos:**
+1. Ubicar la fila del autor a modificar mediante su Nombre o Apellido.
+2. Hacer clic en el botón "Editar" de esa fila.
+3. Modificar los campos en el formulario con los nuevos datos (Nombre, Apellido).
+4. Hacer clic en el botón "Guardar" / "Agregar autor".
+
+**Resultado Esperado:** La fila correspondiente en la tabla se actualiza mostrando los datos modificados.
+
+**Estado:** 
+PASS
