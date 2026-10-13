@@ -1,6 +1,7 @@
 import pytest
 from playwright.sync_api import sync_playwright
 from pages.login_page import LoginPage
+from pages.personas_page import PersonasPage
 
 
 @pytest.fixture
@@ -20,3 +21,10 @@ def page():
 def login_page(page):
     # le pasamos la pagina abierta a nuestra clase LoginPage
     return LoginPage(page)  # crea el objeto
+
+
+@pytest.fixture
+def personas_page(page, login_page):
+    # inicia sesion primero para poder esta en la pantalla de la biblioteca
+    login_page.ingresar_credenciales("admin", "1234") # aqui se inicia sesion atomaticamente
+    return PersonasPage(page)
