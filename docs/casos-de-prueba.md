@@ -204,3 +204,47 @@ PASS
 
 **Estado:** 
 PASS
+
+
+### TC-013 - Alta de libro exitosa
+**Precondición:** Existe al menos un autor registrado en el sistema. El usuario ha iniciado sesión y se encuentra en la sección de Libros.
+
+**Pasos:**
+1. Completar el campo "Título" con un nombre válido (ej: "Ficciones").
+2. Seleccionar un autor existente en la lista desplegable "Autor" (ej: "Jorge Luis Borges").
+3. Completar el campo "Cantidad" con un número mayor a cero (ej: "5").
+4. Hacer clic en el botón "Agregar libro".
+
+**Resultado Esperado:** Se agrega una nueva fila en la tabla de libros mostrando Título, Autor y Cantidad.
+
+**Estado:** 
+PASS
+
+
+### TC-014 - Edición de libro exitosa
+**Precondición:** Existe al menos un libro registrado en la tabla.
+
+**Pasos:**
+1. Ubicar la fila del libro a modificar por su Título o Autor.
+2. Hacer clic en el botón "Editar" de esa fila.
+3. Modificar los campos deseados (Título, Autor o Cantidad).
+4. Hacer clic en el botón "Guardar" / "Agregar libro".
+
+**Resultado Esperado:** La fila en la tabla se actualiza reflejando los nuevos datos.
+
+**Estado:** 
+PASS
+
+
+### TC-015 - Baja/Eliminación de libro
+**Precondición:** Existe al menos un libro registrado en la tabla.
+
+**Pasos:**
+1. Ubicar la fila del libro a eliminar por su Título.
+2. Hacer clic en el botón "Eliminar" correspondiente.
+3. Aceptar la alerta emergente de confirmación de JavaScript.
+
+**Resultado Esperado:** El libro se elimina correctamente y deja de ser visible en la tabla.
+
+**Estado:** 
+PASS
