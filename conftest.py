@@ -4,6 +4,18 @@ from pages.login_page import LoginPage
 from pages.personas_page import PersonasPage
 from pages.autores_page import AutoresPage
 from pages.libros_pages import LibrosPage
+import os
+
+
+# Obtiene la ruta absoluta de la carpeta del proyecto
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+INDEX_PATH = os.path.join(BASE_DIR, "pagina", "index.html")
+
+@pytest.fixture
+def page(context):
+    page = context.new_page()
+    page.goto(f"file://{INDEX_PATH}")
+    return page
 
 
 @pytest.fixture
