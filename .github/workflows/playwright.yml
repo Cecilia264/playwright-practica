@@ -25,9 +25,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Instalar navegadores de Playwright con dependencias de SO
+    - name: Instalar navegadores de Playwright
       run: |
-        playwright install --with-deps
+        python -m playwright install --with-deps
 
     - name: Ejecutar pruebas de Pytest
       run: |
