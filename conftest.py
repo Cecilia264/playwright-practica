@@ -7,18 +7,23 @@ from pages.libros_pages import LibrosPage
 import os
 
 
-import os
-import pytest
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args):
+    # Asegura un tamaño de pantalla estándar para entorno headless (CI)
+    return {
+        **browser_context_args,
+        "viewport": {"width": 1280, "height": 720},
+    }
 
 @pytest.fixture
 def page(context):
     page = context.new_page()
     
-    # Si estamos corriendo en GitHub Actions (CI)
     if os.environ.get("CI"):
-        page.goto("http://localhost:8000/index.html")
+        # Navega directamente a la raíz del servidor http
+        page.goto("http://localhost:8000/")
     else:
-        # Ejecución local en Windows
+        # Ejecución local en tu computadora
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         INDEX_PATH = os.path.join(BASE_DIR, "pagina", "index.html")
         page.goto(f"file://{INDEX_PATH}")
