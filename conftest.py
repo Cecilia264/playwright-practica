@@ -1,27 +1,29 @@
+import os
 import pytest
 from playwright.sync_api import sync_playwright
 from pages.login_page import LoginPage
 from pages.personas_page import PersonasPage
 from pages.autores_page import AutoresPage
 from pages.libros_pages import LibrosPage
-import os
 
 
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args):
-    # Asegura un tamaño de pantalla estándar para entorno headless (CI)
+    # Ajusta el tamaño de pantalla estándar
     return {
         **browser_context_args,
         "viewport": {"width": 1280, "height": 720},
     }
 
+
 @pytest.fixture
 def page(context):
     page = context.new_page()
+    page.set_default_timeout(10000)
     
     if os.environ.get("CI"):
-        # Navega directamente a la raíz del servidor http
-        page.goto("http://localhost:8000/")
+        # Ejecución automática en GitHub Actions
+        page.goto("http://localhost:8000/index.html")
     else:
         # Ejecución local en tu computadora
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -32,28 +34,13 @@ def page(context):
 
 
 @pytest.fixture
-def page():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=500)
-        page = browser.new_page()
-
-        page.goto("http://127.0.0.1:5500/pagina/index.html")
-
-        yield page
-
-        browser.close()
-
-
-@pytest.fixture
 def login_page(page):
-    # le pasamos la pagina abierta a nuestra clase LoginPage
-    return LoginPage(page)  # crea el objeto
+    return LoginPage(page)
 
 
 @pytest.fixture
 def personas_page(page, login_page):
-    # inicia sesion primero para poder esta en la pantalla de la biblioteca
-    login_page.ingresar_credenciales("admin", "1234") # aqui se inicia sesion atomaticamente
+    login_page.ingresar_credenciales("admin", "1234")
     return PersonasPage(page)
 
 
@@ -61,7 +48,7 @@ def personas_page(page, login_page):
 def autores_page(page, login_page):
     login_page.ingresar_credenciales("admin", "1234")
     autores = AutoresPage(page)
-    autores.ir_a_autores()  # inicia sesion y navega directo a la pestaña de Autores
+    autores.ir_a_autores()
     return autores
 
 
