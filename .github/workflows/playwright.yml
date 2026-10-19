@@ -32,4 +32,4 @@ jobs:
 
     - name: Ejecutar pruebas de Pytest
       run: |
-        python -m pytest -vgit add .
+        python -m pytest tests/ -v
