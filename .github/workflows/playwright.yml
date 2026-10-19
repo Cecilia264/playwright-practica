@@ -30,6 +30,8 @@ jobs:
       run: |
         python -m playwright install --with-deps
 
-    - name: Ejecutar pruebas de Pytest
+    - name: Iniciar Servidor Web Local y Ejecutar Pruebas
       run: |
+        python -m http.server 8000 --directory pagina &
+        sleep 3
         python -m pytest tests/ -v

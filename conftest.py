@@ -7,14 +7,22 @@ from pages.libros_pages import LibrosPage
 import os
 
 
-# Obtiene la ruta absoluta de la carpeta del proyecto
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-INDEX_PATH = os.path.join(BASE_DIR, "pagina", "index.html")
+import os
+import pytest
 
 @pytest.fixture
 def page(context):
     page = context.new_page()
-    page.goto(f"file://{INDEX_PATH}")
+    
+    # Si estamos corriendo en GitHub Actions (CI)
+    if os.environ.get("CI"):
+        page.goto("http://localhost:8000/index.html")
+    else:
+        # Ejecución local en Windows
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        INDEX_PATH = os.path.join(BASE_DIR, "pagina", "index.html")
+        page.goto(f"file://{INDEX_PATH}")
+        
     return page
 
 
