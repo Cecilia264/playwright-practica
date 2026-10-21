@@ -1,28 +1,43 @@
 # 📚 Proyecto de QA Automation - Sistema de Gestión de Biblioteca
 
-Este proyecto es un entorno de pruebas automatizadas end-to-end (E2E) desarrollado para validar las funcionalidades de una aplicación web de gestión de biblioteca (SUT - *System Under Test*). 
+Este proyecto es una suite de pruebas automatizadas end-to-end (E2E) desarrollada para validar las funcionalidades de una aplicación web de gestión de biblioteca (SUT - *System Under Test*). 
 
-El proyecto implementa las mejores prácticas de automatización en la industria, utilizando la arquitectura **Page Object Model (POM)** para garantizar un código mantenible, escalable y limpio.
+El proyecto implementa las mejores prácticas de la industria, utilizando la arquitectura **Page Object Model (POM)** para garantizar un código mantenible y limpio, junto con un pipeline de **Integración Continua (CI/CD)** para ejecución automática.
 
 ---
 
 ## 🛠️ Tecnologías y Herramientas Utilizadas
 
-* **Lenguaje de Programación:** Python 3.13+
-* **Framework de Automatización:** Playwright
-* **Test Runner & Assertions:** Pytest
-* **Patrón de Diseño:** Page Object Model (POM)
-* **Control de Versiones:** Git & GitHub
-* **Desarrollo Web (SUT):** HTML5, CSS3, JavaScript (LocalStorage)
+- **Lenguaje de Programación:** Python 3.11+
+- **Framework de Automatización:** Playwright
+- **Test Runner & Assertions:** Pytest (`pytest-playwright`)
+- **Patrón de Diseño:** Page Object Model (POM)
+- **Integración Continua (CI/CD):** GitHub Actions
+- **Control de Versiones:** Git & GitHub
+- **Desarrollo Web (SUT):** HTML5, CSS3, JavaScript (LocalStorage)
+
+---
+
+## 🔄 Integración Continua (CI/CD)
+
+El repositorio cuenta con una integración automática mediante **GitHub Actions** (`.github/workflows/playwright.yml`). 
+
+Cada vez que se realiza un `push` o `pull request` a la rama principal (`main`), el pipeline de CI/CD:
+1. Levanta un entorno Linux (`ubuntu-latest`) en la nube.
+2. Instala Python, Playwright y sus navegadores headless.
+3. Inicia un servidor web local HTTP para servir la aplicación.
+4. Ejecuta la suite de 15 pruebas E2E de forma totalmente automatizada.
 
 ---
 
 ## 📁 Estructura del Proyecto
 
-* **`pages/`**: Implementación de Page Object Model. Contiene los elementos y acciones por pantalla (`login_page.py`, `personas_page.py`, `autores_page.py`, `libros_page.py`).
-* **`tests/`**: Casos de prueba automatizados con Pytest y configuración de fixtures globales en `conftest.py`.
-* **`pagina/`**: Código fuente del Sistema Bajo Prueba (`index.html`, `biblioteca.html`, `app.js`, `estilos.css`).
-* **`docs/`**: Documentación técnica del proyecto (`casos-de-prueba.md`, `reporte-de-bugs.md`).
+- **`.github/workflows/`**: Configuración del pipeline de CI/CD (`playwright.yml`).
+- **`pages/`**: Implementación de Page Object Model (`login_page.py`, `personas_page.py`, `autores_page.py`, `libros_page.py`).
+- **`tests/`**: Casos de prueba automatizados con Pytest (`test_login.py`, `test_personas.py`, `test_autores.py`, `test_libros.py`).
+- **`pagina/`**: Código fuente del Sistema Bajo Prueba (`index.html`, `biblioteca.html`, `app.js`, `estilos.css`).
+- **`docs/`**: Documentación técnica del proyecto (`casos-de-prueba.md`, `reporte-de-bugs.md`).
+- **`conftest.py`**: Fixtures globales y soporte de navegación dual para entornos Local y CI/CD.
 
 ---
 
@@ -57,15 +72,15 @@ Actualmente el proyecto cuenta con **15 casos de prueba automatizados** en verde
 
 ## 🚀 Cómo Ejecutar el Proyecto Localmente
 
-* **Clonar el repositorio:** `git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git`
-* **Entrar a la carpeta:** `cd TU_REPOSITORIO`
-* **Crear entorno virtual:** `python -m venv venv`
-* **Activar entorno virtual (PowerShell):** `.\venv\Scripts\Activate.ps1`
-* **Instalar dependencias:** `pip install -r requirements.txt`
-* **Instalar navegadores de Playwright:** `playwright install`
-* **Ejecutar las pruebas automatizadas:** `python -m pytest -v`
+- **Clonar el repositorio:** `git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git`
+- **Entrar a la carpeta:** `cd TU_REPOSITORIO`
+- **Crear entorno virtual:** `python -m venv venv`
+- **Activar entorno virtual (PowerShell):** `.\venv\Scripts\Activate.ps1`
+- **Instalar dependencias:** `pip install -r requirements.txt`
+- **Instalar navegadores de Playwright:** `python -m playwright install`
+- **Ejecutar las pruebas automatizadas:** `python -m pytest tests/ -v`
 
 ---
 
 ## 👩‍💻 Autora
-* **Cecilia Cometto**
+- **Cecilia Cometto** - QA Automation Engineer / Tester
